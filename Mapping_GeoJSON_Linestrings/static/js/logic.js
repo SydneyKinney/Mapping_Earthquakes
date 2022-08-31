@@ -74,7 +74,19 @@ L.control.layers(baseMaps).addTo(map);
 
 // Accessing the airport GeoJSON URL
 // let airportData = "https://raw.githubusercontent.com/<GitHub_name>/Mapping_Earthquakes/main/majorAirports.json";
-// let airportData = "https://raw.githubusercontent.com/SydneyKinney/Mapping_Earthquakes/main/majorAirports.json";
+let airportData = "https://raw.githubusercontent.com/SydneyKinney/Mapping_Earthquakes/main/majorAirports.json";
+// Grabbing our GeoJSON data.
+d3.json(airportData).then(function(data) {
+  console.log(data);
+// Creating a GeoJSON layer with the retrieved data.  Skill Drill 13.5.3 add popups to all markers
+L.geoJson(data,{
+  onEachFeature: function(feature, layer) {
+    console.log(layer);
+    layer.bindPopup("<h3>" + "Airport Code: " + feature.properties.faa +
+    "</h3><hr><p>" + feature.properties.name + "</p>");
+  }
+  }).addTo(map);
+});
 
 // Accessing the Toronto airline routes GeoJSON URL.
 let torontoData = "https://raw.githubusercontent.com/SydneyKinney/Mapping_Earthquakes/main/torontoRoutes.json";
