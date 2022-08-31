@@ -41,7 +41,7 @@
 
 
 // We create the tile layer that will be the background of our map.
-let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
     accessToken: API_KEY
@@ -58,12 +58,12 @@ let dark = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{
 // Create a base layer that holds both maps.
 let baseMaps = {
   Street: streets,
-  Dark: dark
+  Dark: light
 };
 
 // Create the map object with center, zoom level and default layer.
 let map = L.map('mapid', {
-  center: [30, 30],
+  center: [44, -80],
   zoom: 2,
   layers: [streets]
 })
@@ -74,9 +74,13 @@ L.control.layers(baseMaps).addTo(map);
 
 // Accessing the airport GeoJSON URL
 // let airportData = "https://raw.githubusercontent.com/<GitHub_name>/Mapping_Earthquakes/main/majorAirports.json";
-let airportData = "https://raw.githubusercontent.com/SydneyKinney/Mapping_Earthquakes/main/majorAirports.json";
+// let airportData = "https://raw.githubusercontent.com/SydneyKinney/Mapping_Earthquakes/main/majorAirports.json";
+
+// Accessing the Toronto airline routes GeoJSON URL.
+let torontoData = "https://raw.githubusercontent.com/SydneyKinney/Mapping_Earthquakes/main/torontoRoutes.json";
+
 // Grabbing our GeoJSON data.
-d3.json(airportData).then(function(data) {
+d3.json(torontoData).then(function(data) {
   console.log(data);
 // Creating a GeoJSON layer with the retrieved data.  Skill Drill 13.5.3 add popups to all markers
 L.geoJson(data,{
