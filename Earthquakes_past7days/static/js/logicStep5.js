@@ -51,7 +51,7 @@ d3.json(earthquake).then(function (data) {
     return {
       opacity: 1,
       fillOpacity: 1,
-      fillColor: "#ffae42",
+      fillColor: getColor(feature.properties.mag),
       color: "#000000",
       radius: getRadius(feature.properties.mag),
       stroke: true,
@@ -93,7 +93,7 @@ d3.json(earthquake).then(function (data) {
   L.geoJson(data, {
     // We turn each feature into a circleMarker on the map.
     pointToLayer: function (feature, latlng) {
-      console.log(data);
+      // console.log(data);
       return L.circleMarker(latlng);
     },
     // We set the style for each circleMarker using our styleInfo function.
@@ -137,4 +137,5 @@ d3.json(earthquake).then(function (data) {
 
   // Then we add the earthquake layer to our map.
   earthquakes.addTo(map);
+
 });
